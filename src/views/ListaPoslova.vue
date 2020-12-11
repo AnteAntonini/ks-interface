@@ -19,10 +19,19 @@
 
             <v-divider class="mb-4"></v-divider>
 
-            <v-list nav class="list" v-for="item in items" :key="item.title">
+            <v-list
+              nav
+              class="list"
+              v-for="(item, index) in items"
+              :key="item.title"
+            >
               <v-list-item link>
                 <v-list-item-icon>
-                  <v-icon>{{ item.icon }}</v-icon>
+                  <v-radio-group v-model="radioGroup">
+                    <v-radio
+                      :value="index"
+                    ></v-radio>
+                  </v-radio-group>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title class="nav-list">
@@ -34,13 +43,17 @@
           </v-navigation-drawer>
         </v-card>
       </v-col>
-      <!-- EVENT LIST -->
-      <v-app-bar color="white" style="height: 88px; width: 100%; margin-left: 60px" fixed app elevate-on-scroll>
+
+      <!-- SEARCH NAVBAR -->
+      <v-app-bar
+        color="white"
+        style="height: 88px; width: 100%; margin-left: 60px"
+        fixed
+        app
+        elevate-on-scroll
+      >
         <v-spacer></v-spacer>
-        <div
-          class="d-flex justify-space-between py-4"
-          style="width:500px;"
-        >
+        <div class="d-flex justify-space-between py-4" style="width: 500px">
           <v-text-field
             label="Pretraži poslove"
             prepend-inner-icon="mdi-magnify"
@@ -54,19 +67,6 @@
         <v-spacer></v-spacer>
       </v-app-bar>
       <v-col md="6" class="mx-auto">
-        <!-- <h1>Pretraži poslove</h1> -->
-        <!-- <div
-          class="d-flex justify-space-between pr-3 py-4"
-          style="max-width: 550px"
-        >
-          <v-text-field
-            prepend-inner-icon="mdi-magnify"
-            class="search-events"
-            hint="search other jobs"
-          ></v-text-field>
-          <v-btn class="pa-6" style="text-transform: capitalize">Search</v-btn>
-        </div> -->
-
         <!-- Lista poslova -->
         <div v-for="(posao, i) in poslovi" :key="i">
           <v-col cols="12" class="pl-0">
@@ -77,7 +77,7 @@
                 max-width="500"
                 height="200"
                 router
-                :to="{ name: 'PosaoDetaljno' }"
+                :to="{ name: 'PosaoDetaljno', params: {posaoDetaljno :  posao} }"
                 :class="{ 'on-hover': hover }"
                 :elevation="hover ? 16 : 2"
               >
@@ -117,6 +117,7 @@
 export default {
   data() {
     return {
+      radioGroup: 1,
       items: [
           { title: 'Svi', icon: 'mdi-view-dashboard',},
           { title: 'Fizički', icon: 'mdi-image' },
