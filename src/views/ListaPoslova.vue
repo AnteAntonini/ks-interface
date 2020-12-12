@@ -21,21 +21,15 @@
 
             <v-list
               nav
-              class="list"
-              v-for="(item, index) in items"
+              class="list ml-5"
+              v-for="item in items"
               :key="item.title"
             >
-              <v-list-item link>
-                <v-list-item-icon>
-                  <v-radio-group v-model="radioGroup">
-                    <v-radio
-                      :value="index"
-                    ></v-radio>
-                  </v-radio-group>
-                </v-list-item-icon>
+              <v-list-item>
+                  <input class="form-radio-input" type="radio" :value="item.value" :id="'item'+index" v-model="selectedRadio">
                 <v-list-item-content>
-                  <v-list-item-title class="nav-list">
-                    {{ item.title }}
+                  <v-list-item-title class="nav-list ml-5">
+                    {{ item.title }} 
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -56,6 +50,9 @@
         <div class="d-flex justify-space-between py-4" style="width: 500px">
           <v-text-field
             label="Pretraži poslove"
+            v-model="search"
+            autocomplete="off"
+            @click="removeFilter"
             prepend-inner-icon="mdi-magnify"
             class="search-events mt-6"
             hint="search other jobs"
@@ -68,7 +65,7 @@
       </v-app-bar>
       <v-col md="6" class="mx-auto">
         <!-- Lista poslova -->
-        <div v-for="(posao, i) in poslovi" :key="i">
+        <div v-for="(posao, i) in filtriraniPoslovi" :key="i">
           <v-col cols="12" class="pl-0">
             <v-hover v-slot="{ hover }">
               <v-card
@@ -117,21 +114,46 @@
 export default {
   data() {
     return {
-      radioGroup: 1,
+      selectedRadio: [],
+      search: '',
       items: [
-          { title: 'Svi', icon: 'mdi-view-dashboard',},
-          { title: 'Fizički', icon: 'mdi-image' },
-          { title: 'IT', icon: 'mdi-help-box' },
-          {title: 'Ostalo', icon: 'mdi-help-box'}
+          { title: 'Svi',  value: 'svi'},
+          { title: 'Fizicki', value: 'fizicki' },
+          { title: 'IT',  value:'it' },
+          {title: 'Ostalo', value: 'ostalo'}
         ],
         poslovi: [
-            {title: 'Kuhar', satnica: 30, lokacija: 'Zagreb', poslodavac: 'Hilton', brojOsoba: 2},
-            {title: 'Dizajner', satnica: 60, lokacija: 'Zagreb', poslodavac: 'Marko', brojOsoba: 1},
-            {title: 'IT', satnica: 40, lokacija: 'Zagreb', poslodavac: 'Marko', brojOsoba: 4},
-            {title: 'IT', satnica: 40, lokacija: 'Zagreb', poslodavac: 'Marko', brojOsoba: 4},
+            {title: 'Kuhar', satnica: 30, lokacija: 'Zagreb', poslodavac: 'Hilton', brojOsoba: 2, tipPosla: 'ostalo'},
+            {title: 'Konobar', satnica: 25, lokacija: 'Dubrovnik', poslodavac: 'Bellevue', brojOsoba: 1, tipPosla: 'ostalo'},
+            {title: 'Dizajner', satnica: 60, lokacija: 'Zagreb', poslodavac: 'Marko', brojOsoba: 1, tipPosla: 'it'},
+            {title: 'Frontend Developer', satnica: 40, lokacija: 'Zagreb', poslodavac: 'Marko', brojOsoba: 4, tipPosla: 'it'},
+            {title: 'Backend Developer', satnica: 50, lokacija: 'Zagreb', poslodavac: 'Marko', brojOsoba: 4, tipPosla: 'it'},  
+            {title: 'Građevina', satnica: 45, lokacija: 'Split', poslodavac: 'Dado', brojOsoba: 14, tipPosla: 'fizicki'},
         ]
     }
   },
+  methods: {
+    removeFilter() {
+      this.selectedRadio = null
+    }
+  },
+  computed: {
+    filtriraniPoslovi() {
+        return this.poslovi.filter((posao) => {
+          if(this.selectedRadio === 'svi') {
+            return posao.title
+          } else if (this.selectedRadio === 'ostalo') {
+            return posao.tipPosla.match('ostalo')
+          } else if (this.selectedRadio === 'it') {
+            return posao.tipPosla.match('it')
+          } else if (this.selectedRadio === 'fizicki') {
+            return posao.tipPosla.match('fizicki')
+          }
+           else
+          return posao.title.toLowerCase().match(this.search)
+        }) 
+    }
+  }
  }
 </script>
 
