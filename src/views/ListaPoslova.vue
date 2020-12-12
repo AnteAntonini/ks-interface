@@ -57,9 +57,6 @@
             class="search-events mt-6"
             hint="search other jobs"
           ></v-text-field>
-          <v-btn class="pa-3 ml-3 mt-6" style="text-transform: capitalize"
-            >Search</v-btn
-          >
         </div>
         <v-spacer></v-spacer>
       </v-app-bar>
