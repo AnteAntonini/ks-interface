@@ -21,15 +21,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "register" */ '../components/Register.vue')
   },
   {
-    path: '/lista',
-    name: 'ListaPoslova',
-    component: () => import(/* webpackChunkName: "ListaPoslova" */ '../views/ListaPoslova.vue')
+    path: '/list',
+    name: 'JobList',
+    component: () => import(/* webpackChunkName: "JobList" */ '../views/JobList.vue')
   },
   {
-    path: '/posao',
-    name: 'PosaoDetaljno',
+    path: '/job',
+    name: 'SingleJob',
     props: true,
-    component: () => import(/* webpackChunkName: "PojedinacniPrikaz" */ '../views/PojedinacniPrikaz.vue')
+    component: () => import(/* webpackChunkName: "SingleJob" */ '../views/SingleJob.vue')
   }
 ]
 
@@ -38,7 +38,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   scrollBehavior() {
-    return {x: 0, y: 0}
+    return { x: 0, y: 0 }
   }
 })
 
