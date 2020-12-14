@@ -30,6 +30,11 @@ const routes = [
     name: 'SingleJob',
     props: true,
     component: () => import(/* webpackChunkName: "SingleJob" */ '../views/SingleJob.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "Profile" */ '../views/Profile.vue')
   }
 ]
 

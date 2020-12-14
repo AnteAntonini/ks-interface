@@ -33,9 +33,11 @@
         </v-menu>
       </div>
 
-      <span
-        class="blue-grey darken-4 white--text d-none d-sm-flex py-1 px-2 rounded"
-        >example@gmail.com</span
+      <v-btn
+        depressed
+        @click="$router.push({ name: 'Profile' })"
+        class="blue-grey darken-4 white--text d-none d-sm-flex py-1 px-2 text-lowercase"
+        >example@gmail.com</v-btn
       >
 
       <!-- Logout -->

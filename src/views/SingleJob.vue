@@ -10,6 +10,7 @@
             <v-chip class="ma-2 px-5" outlined x-large>
               {{ posao.satnica }}kn/h
             </v-chip>
+            <Review />
           </v-card-title>
           <v-card-text style="font-size: 1.5em">
             <div class="my-10">
@@ -69,7 +70,7 @@
                   text
                   v-bind="attrs"
                   @click="snackbar = false"
-                  :to="{name: 'ListaPoslova'}"
+                  :to="{ name: 'ListaPoslova' }"
                 >
                   Close
                 </v-btn>
@@ -83,22 +84,27 @@
 </template>
 
 <script>
+import Review from "../components/Review";
+
 export default {
-    name: 'PosaoDetaljno',
-    data() {
-      return {
-        snackbar: false,
-        text: 'Uspješno ste se prijavili za posao',
-        posao: this.posaoDetaljno
-      }
-    },
-    props: {
-      posaoDetaljno: Object
-    },
-    mounted() {
-      console.log(this.posao);
-    }
-}
+  name: "PosaoDetaljno",
+  components: {
+    Review,
+  },
+  data() {
+    return {
+      snackbar: false,
+      text: "Uspješno ste se prijavili za posao",
+      posao: this.posaoDetaljno,
+    };
+  },
+  props: {
+    posaoDetaljno: Object,
+  },
+  mounted() {
+    console.log(this.posao);
+  },
+};
 </script>
 
 <style scoped>
