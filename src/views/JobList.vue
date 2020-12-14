@@ -60,6 +60,13 @@
       </v-app-bar>
       <v-col md="6" class="mx-auto"> -->
 
+    <!-- Create new job -->
+    <v-row>
+      <v-col cols="12">
+        <JobDialog />
+      </v-col>
+    </v-row>
+
     <!-- Lista poslova -->
     <v-row>
       <v-col cols="12" md="3">
@@ -152,7 +159,12 @@
 
 
 <script>
+import JobDialog from "../components/JobDialog";
+
 export default {
+  components: {
+    JobDialog,
+  },
   data() {
     return {
       selectedRadio: [],
