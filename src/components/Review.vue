@@ -17,25 +17,23 @@
             <!-- Rate the worker -->
             <v-col cols="3">Rate the worker</v-col>
             <v-col cols="9"
-              ><v-slider
-                max="5"
-                min="1"
-                v-model="user.val"
-                :thumb-color="user.color"
-                thumb-label="always"
-              ></v-slider>
+              ><v-rating
+                v-model="rating1"
+                background-color="orange lighten-3"
+                color="orange"
+                large
+              ></v-rating>
             </v-col>
 
             <!-- Rate the job -->
             <v-col cols="3">Rate the job</v-col>
             <v-col cols="9">
-              <v-slider
-                max="5"
-                min="1"
-                v-model="job.val"
-                :thumb-color="job.color"
-                thumb-label="always"
-              ></v-slider>
+              <v-rating
+                v-model="rating2"
+                background-color="orange lighten-3"
+                color="orange"
+                large
+              ></v-rating>
             </v-col>
 
             <!-- Leave a comment -->
@@ -68,8 +66,8 @@ export default {
   data: () => ({
     dialog: false,
     comment: null,
-    user: { val: 3, color: "blue-grey darken-4" },
-    job: { val: 3, color: "blue-grey" },
+    rating1: 3,
+    rating2: 3,
   }),
 };
 </script>
