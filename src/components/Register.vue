@@ -4,7 +4,7 @@
       <v-row style="width: 80%" class="ma-auto mt-10">
         <v-col cols="12">
           <v-text-field
-            v-model="firstname"
+            v-model="user.firstname"
             :rules="nameRules"
             :counter="10"
             label="First name"
@@ -14,7 +14,7 @@
 
         <v-col cols="12">
           <v-text-field
-            v-model="lastname"
+            v-model="user.lastname"
             :rules="nameRules"
             :counter="15"
             label="Last name"
@@ -24,7 +24,7 @@
 
         <v-col cols="12">
           <v-text-field
-            v-model="email"
+            v-model="user.email"
             :rules="emailRules"
             label="E-mail"
             required
@@ -34,7 +34,7 @@
 
         <v-col cols="12">
           <v-text-field
-            v-model="password"
+            v-model="user.password"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
@@ -44,7 +44,9 @@
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
-          <v-btn class="button-register" @click="signup" :disabled="!valid">Register</v-btn>
+          <v-btn class="button-register" @click="signup" :disabled="!valid"
+            >Register</v-btn
+          >
         </v-col>
       </v-row>
     </v-container>
@@ -52,36 +54,40 @@
 </template>
 
 <script>
-  export default {
-    name: 'Register',
-    data: () => ({
-      valid: false,
-      firstname: '',
-      lastname: '',
-      error: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters',
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
-      ],
-        show1: false,
-        password: '',
-        rules: {
-            required: value => !!value || 'Required.',
-            min: v => v.length >= 8 || 'Min 8 characters',
-            emailMatch: () => (`The email and password you entered don't match`),
-        }, 
-    }),
-    methods: {
-      signup() {
-        this.$router.push({name: 'Login'})
-      }
-    }
-  }
+export default {
+  name: "Register",
+  data: () => ({
+    valid: false,
+    user: {
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+    },
+    error: "",
+    nameRules: [
+      (v) => !!v || "Name is required",
+      (v) => v.length <= 10 || "Name must be less than 10 characters",
+    ],
+    emailRules: [
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+/.test(v) || "E-mail must be valid",
+    ],
+    show1: false,
+    rules: {
+      required: (value) => !!value || "Required.",
+      min: (v) => v.length >= 8 || "Min 8 characters",
+      emailMatch: () => `The email and password you entered don't match`,
+    },
+  }),
+  methods: {
+    signup() {
+      this.$store.dispatch("user", this.user);
+
+      this.$router.push({ name: "Login" });
+    },
+  },
+};
 </script>
 
 <style scoped>
