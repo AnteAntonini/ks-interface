@@ -42,7 +42,7 @@
       >
 
       <!-- Logout -->
-      <div v-if="fetchUser">
+      <div v-if="fetchUser && isLogedIn">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn @click="logOut()" icon v-bind="attrs" v-on="on">
