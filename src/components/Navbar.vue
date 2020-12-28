@@ -102,15 +102,13 @@ export default {
       { icon: "mdi-account", text: "Login / Register", route: "/login" },
     ],
   }),
-  methods: {
-    home() {
-      this.$router.push('/')
-    }
-  },
   computed: {
     ...mapGetters(["fetchUser", "isLogedIn"]),
   },
   methods: {
+    home() {
+      this.$router.push('/')
+    },
     logOut() {
       this.$store.dispatch("removeUser");
     },
