@@ -3,9 +3,11 @@
     <!-- Nav -->
     <v-app-bar app flat>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="text-uppercase">
+      <v-toolbar-title class="text-uppercase" @click="home">
+        <v-btn text>
         <span>job</span>
         <span class="font-weight-bold">service</span>
+        </v-btn>  
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -96,5 +98,10 @@ export default {
       { icon: "mdi-format-list-bulleted", text: "Jobs List", route: "/list" },
     ],
   }),
+  methods: {
+    home() {
+      this.$router.push('/')
+    }
+  }
 };
 </script>

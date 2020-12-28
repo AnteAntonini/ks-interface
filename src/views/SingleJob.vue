@@ -27,7 +27,8 @@
             </div>
             <div>
               <span>Opis posla:</span>
-              <v-textarea class="mt-5" style="width: 60%" outlined>
+              <v-textarea class="mt-5" style="width: 60%" outlined :value="posao.description" readonly>
+                
               </v-textarea>
             </div>
             <div>
@@ -37,19 +38,20 @@
               <div>
                 <span>Natječaj vrijedi od:</span>
                 <span style="font-size: 0.8em; margin-left: 20px"
-                  >30.11.2020.</span
+                  >30-11-2020.</span
                 >
               </div>
               <div>
                 <span>Natječaj vrijedi do:</span>
                 <span style="font-size: 0.8em; margin-left: 20px"
-                  >10.12.2020.</span
+                  >{{posao.date}}</span
                 >
               </div>
             </div>
             <div class="mt-10">
               <span>Napomena:</span>
-              <v-textarea class="mt-5" style="width: 60%" outlined>
+              <v-textarea class="mt-5" style="width: 60%" outlined value="napomena..." readonly>
+               
               </v-textarea>
             </div>
           </v-card-text>
@@ -70,7 +72,7 @@
                   text
                   v-bind="attrs"
                   @click="snackbar = false"
-                  :to="{ name: 'ListaPoslova' }"
+                  :to="{ name: 'JobList' }"
                 >
                   Close
                 </v-btn>

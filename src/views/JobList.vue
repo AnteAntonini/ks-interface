@@ -1,69 +1,10 @@
 <template>
   <div class="pa-4">
-    <!-- NAVIGATION DRAWER -->
-    <!-- <v-col md="3" class="pa-0 filters" style="height: 100%">
-        <v-card width="265px" class="pl-9 mr-0">
-          <v-navigation-drawer
-            permanent
-            fixed
-            style="height: 100%; width: 255px"
-          >
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title py-5">
-                  Filters
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-divider class="mb-4"></v-divider>
-
-            <v-list
-              nav
-              class="list ml-5"
-              v-for="item in items"
-              :key="item.title"
-            >
-              <v-list-item>
-                  <input class="form-radio-input" type="radio" :value="item.value" :id="'item'+index" v-model="selectedRadio">
-                <v-list-item-content>
-                  <v-list-item-title class="nav-list ml-5">
-                    {{ item.title }} 
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-navigation-drawer>
-        </v-card>
-      </v-col>
-
-      <v-app-bar
-        color="white"
-        style="height: 88px; width: 100%; margin-left: 60px"
-        fixed
-        app
-        elevate-on-scroll
-      >
-        <v-spacer></v-spacer>
-        <div class="d-flex justify-space-between py-4" style="width: 500px">
-          <v-text-field
-            label="Pretraži poslove"
-            v-model="search"
-            autocomplete="off"
-            @click="removeFilter"
-            prepend-inner-icon="mdi-magnify"
-            class="search-events mt-6"
-            hint="search other jobs"
-          ></v-text-field>
-        </div>
-        <v-spacer></v-spacer>
-      </v-app-bar>
-      <v-col md="6" class="mx-auto"> -->
 
     <!-- Create new job -->
     <v-row>
       <v-col cols="12">
-        <JobDialog />
+        <JobDialog  @updateJob="createdJob"/>
       </v-col>
     </v-row>
 
@@ -88,7 +29,7 @@
         </v-list-item>
 
         <v-list nav class="list">
-          <v-list-item class="py-0" v-for="item in items" :key="item.title">
+          <v-list-item class="py-0" v-for="(item,index) in items" :key="item.title">
             <input
               class="form-radio-input"
               type="radio"
@@ -182,7 +123,9 @@ export default {
           lokacija: "Zagreb",
           poslodavac: "Hilton",
           brojOsoba: 2,
-          tipPosla: "ostalo",
+          job_type: "ostalo",
+          description: 'opis posla...',
+          date: '01-01-2021'
         },
         {
           title: "Konobar",
@@ -190,7 +133,9 @@ export default {
           lokacija: "Dubrovnik",
           poslodavac: "Bellevue",
           brojOsoba: 1,
-          tipPosla: "ostalo",
+          job_type: "ostalo",
+          description: 'opis posla...',
+          date: '01-01-2021'
         },
         {
           title: "Dizajner",
@@ -198,7 +143,9 @@ export default {
           lokacija: "Zagreb",
           poslodavac: "Marko",
           brojOsoba: 1,
-          tipPosla: "it",
+          job_type: "it",
+          description: 'opis posla...',
+          date: '01-01-2021'
         },
         {
           title: "Frontend Developer",
@@ -206,7 +153,9 @@ export default {
           lokacija: "Zagreb",
           poslodavac: "Marko",
           brojOsoba: 4,
-          tipPosla: "it",
+          job_type: "it",
+          description: 'opis posla...',
+          date: '01-01-2021'
         },
         {
           title: "Backend Developer",
@@ -214,7 +163,9 @@ export default {
           lokacija: "Zagreb",
           poslodavac: "Marko",
           brojOsoba: 4,
-          tipPosla: "it",
+          job_type: "it",
+          description: 'opis posla...',
+          date: '01-01-2021'
         },
         {
           title: "Građevina",
@@ -222,7 +173,9 @@ export default {
           lokacija: "Split",
           poslodavac: "Dado",
           brojOsoba: 14,
-          tipPosla: "fizicki",
+          job_type: "fizicki",
+          description: 'opis posla...',
+          date: '01-01-2021'
         },
       ],
     };
@@ -231,6 +184,19 @@ export default {
     removeFilter() {
       this.selectedRadio = null;
     },
+    createdJob(param) {
+      this.poslovi.push({
+        title: param.name,
+        satnica: param.price,
+        lokacija: param.location,
+        poslodavac: 'Dado',
+        brojOsoba: param.num_of_workers,
+        job_type: param.job_type,
+        date: param.date,
+        description: param.description
+      })
+      
+    }
   },
   computed: {
     filtriraniPoslovi() {
@@ -238,11 +204,11 @@ export default {
         if (this.selectedRadio === "svi") {
           return posao.title;
         } else if (this.selectedRadio === "ostalo") {
-          return posao.tipPosla.match("ostalo");
+          return posao.job_type.match("ostalo");
         } else if (this.selectedRadio === "it") {
-          return posao.tipPosla.match("it");
+          return posao.job_type.match("it");
         } else if (this.selectedRadio === "fizicki") {
-          return posao.tipPosla.match("fizicki");
+          return posao.job_type.match("fizicki");
         } else return posao.title.toLowerCase().match(this.search);
       });
     },
