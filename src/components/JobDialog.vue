@@ -126,7 +126,7 @@
             Cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue-grey darken-4" dark @click="dialog = false">
+          <v-btn color="blue-grey darken-4" dark @click="dialog = false; addNewJob()" >
             Create job
           </v-btn>
         </v-card-actions>
@@ -152,6 +152,11 @@ export default {
       num_of_workers: 1,
     },
   }),
+  methods: {
+    addNewJob: function() {
+      this.$emit('updateJob', this.job)
+    }
+  }
 };
 </script>
 

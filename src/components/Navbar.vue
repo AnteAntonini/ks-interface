@@ -3,9 +3,11 @@
     <!-- Nav -->
     <v-app-bar app flat>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="text-uppercase">
+      <v-toolbar-title class="text-uppercase" @click="home">
+        <v-btn text>
         <span>job</span>
         <span class="font-weight-bold">service</span>
+        </v-btn>  
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -104,6 +106,9 @@ export default {
     ...mapGetters(["fetchUser", "isLogedIn"]),
   },
   methods: {
+    home() {
+      this.$router.push('/')
+    },
     logOut() {
       this.$store.dispatch("removeUser");
     },
