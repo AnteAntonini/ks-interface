@@ -34,17 +34,18 @@
       </div>
 
       <v-btn
+        v-if="fetchUser && isLogedIn"
         depressed
         @click="$router.push({ name: 'Profile' })"
         class="blue-grey darken-4 white--text d-none d-sm-flex py-1 px-2 text-lowercase"
-        >example@gmail.com</v-btn
+        >{{ fetchUser.email }}</v-btn
       >
 
       <!-- Logout -->
-      <div>
+      <div v-if="fetchUser">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
+            <v-btn @click="logOut()" icon v-bind="attrs" v-on="on">
               <v-icon>mdi-logout</v-icon>
             </v-btn>
           </template>
@@ -88,13 +89,24 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data: () => ({
     drawer: false,
     links: [
       { icon: "mdi-home", text: "Home", route: "/" },
       { icon: "mdi-format-list-bulleted", text: "Jobs List", route: "/list" },
+      { icon: "mdi-account", text: "Login / Register", route: "/login" },
     ],
   }),
+  computed: {
+    ...mapGetters(["fetchUser", "isLogedIn"]),
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch("removeUser");
+    },
+  },
 };
 </script>

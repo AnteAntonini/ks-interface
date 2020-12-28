@@ -89,6 +89,8 @@ export default {
   }),
   methods: {
     login() {
+      this.$store.dispatch("dispatchLogin");
+
       this.$router.push({ name: "Home" });
     },
   },

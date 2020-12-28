@@ -55,6 +55,7 @@
           </v-card-text>
           <v-card-actions>
             <v-btn
+              v-if="isLogedIn"
               color="green"
               dark
               class="mx-auto pa-7 mb-10"
@@ -84,6 +85,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Review from "../components/Review";
 
 export default {
@@ -97,6 +99,9 @@ export default {
       text: "Uspješno ste se prijavili za posao",
       posao: this.posaoDetaljno,
     };
+  },
+  computed: {
+    ...mapGetters(["isLogedIn"]),
   },
   props: {
     posaoDetaljno: Object,
