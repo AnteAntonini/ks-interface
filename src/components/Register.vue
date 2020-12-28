@@ -82,7 +82,7 @@ export default {
   }),
   methods: {
     signup() {
-      this.$store.dispatch("user", this.user);
+      this.$store.dispatch("dispatchUser", this.user);
 
       this.$router.push({ name: "Login" });
     },
