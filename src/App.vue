@@ -26,4 +26,8 @@ export default {
 #app {
   background-color: #eee;
 }
+
+.center {
+  margin-top: 40vh;
+}
 </style>

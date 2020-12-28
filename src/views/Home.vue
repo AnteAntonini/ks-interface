@@ -1,21 +1,17 @@
 <template>
   <div class="text-center">
-    <v-parallax src="../assets/home-page.png" style="height: 90vh;width: 100vw;" >
-      <span class="home-text">Welcome to the JobService</span>
-    </v-parallax>
+    <v-img fluid src="@/assets/home-page-img.jpg">
+      <v-btn
+        @click="$router.push({ name: 'JobList' })"
+        depressed
+        class="center white--text pa-6"
+        color="blue-grey darken-4"
+        >Search for jobs</v-btn
+      >
+    </v-img>
   </div>
 </template>
 
 <script>
 export default {};
 </script>
-
-
-<style scoped>
-.home-text {
-  margin-right: 16px;
-  background: grey;
-  font-size: 2.5em !important;
-  color: #1A237E;
-}
-</style>
